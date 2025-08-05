@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import type ms from 'ms'
 
 dotenv.config({ path: path.join(process.cwd(), '.env') });
 
@@ -9,5 +10,5 @@ export default {
   saltRound:process.env.SALT_ROUND,
   database_url: process.env.DATABASE_URL,
   access_secret:process.env.JWT_ACCESS_TOKEN_SECRET,
-  access_expires_in:process.env.JWT_ACCESS_TOKEN_EXPIRE_IN
+  access_expires_in:process.env.JWT_ACCESS_TOKEN_EXPIRE_IN as ms.StringValue
 };

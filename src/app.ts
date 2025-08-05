@@ -4,6 +4,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import httpStatus from 'http-status';
 import sendResponse from './app/utils/sendResponse';
 import router from './app/router';
+import AppError from './app/error/appError';
 
 
 const app: Application = express();
@@ -21,6 +22,12 @@ app.get('/', (req: Request, res: Response) => {
   })
 });
 
+//Not found route handler
+app.use((req, res, next) => {
+  next(new AppError(httpStatus.NOT_FOUND,`Route ${req.originalUrl} not found.`));
+});
+
+//Global error Handler
 app.use(globalErrorHandler);
 
 export default app;
